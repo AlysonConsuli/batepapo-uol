@@ -1,0 +1,103 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: #f3f3f3;
+    max-width: 600px;
+}
+
+header{
+    height: 80px;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 22px;
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
+
+img{
+    width: 75px;
+    height: 53px;
+}
+
+header ion-icon{
+    font-size: 45px;
+    cursor: pointer;
+}
+
+main{
+    margin-top: 26px;
+    margin-bottom: 84px;
+}
+
+.msg{
+    min-height: 40px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 10px 8px;
+    margin-bottom: 4px;
+    line-height: 16px;
+}
+
+span{
+    font-size: 14px;
+    font-weight: 400;
+}
+
+strong{
+    font-weight: 700;
+}
+
+small{
+    color: #AAAAAA;
+}
+
+.entrouSaiu{
+    background-color: #dcdcdc
+}
+
+.privado{
+    background-color: #FFDEDE;
+}
+
+footer{
+    height: 80px;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 17px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 600px;
+}
+
+input{
+    border: none;
+    font-size: 18px;
+    font-weight: 400;
+    width: 100%;
+    margin-right: 10px;
+}
+
+input:focus{
+    outline: none;
+}
+
+::placeholder {
+    color: #000;
+    font-style: italic;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+footer ion-icon{
+    font-size: 26px;
+    cursor: pointer;
+}

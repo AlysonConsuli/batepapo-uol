@@ -18,13 +18,19 @@
 
 <body>
     
+    <div class="telaDeEntrada">
+        <img src="logoUol.png" alt="Logo Uol">
+        <input type="text" placeholder="Digite seu nome" data-identifier="enter-name">
+        <button onclick="entrarNaSala()" data-identifier="start">Entrar</button>
+    </div>
+
     <header>
         <img src="logoUol.png" alt="Logo Uol">
         <ion-icon name="people"></ion-icon>
     </header>
 
     <main>
-        <div class="msg entrouSaiu">
+       <!-- <div class="msg entrouSaiu">
             <span><small>(09:21:45)</small> <strong>João</strong>  entra na sala...</span>
         </div>
         <div class="msg">
@@ -34,7 +40,7 @@
             <span><small>(09:22:38)</small> <strong>Maria</strong>  para <strong>João</strong>:  Oi João :)</span>
         </div>
         <div class="msg privado">
-            <span><small>(09:22:48)</small> <strong>João</strong>  reservadamente para <strong>Maria</strong>:  Oi gatinha quer tc?</span>
+            <span><small>(09:22:48)</small> <strong>João</strong>  reservadamente para <strong>Maria</strong>: Oi gatinha quer tc?</span>
         </div>
         <div class="msg entrouSaiu">
             <span><small>(09:22:58)</small> <strong>Maria</strong>  sai na sala...</span>
@@ -70,19 +76,19 @@
         </div>
         <div class="msg entrouSaiu">
             <span><small>(09:22:58)</small> <strong>Maria</strong>  sai na sala...</span>
-        </div>
+        </div> -->
         
     </main>
 
     <footer>
         <input type="text" placeholder="Escreva aqui...">
-        <ion-icon name="paper-plane-outline"></ion-icon>
+        <ion-icon name="paper-plane-outline" onclick="enviarMsg()" data-identifier="send-message"></ion-icon>
     </footer>
 
 
 
 
-   <!-- <ion-icon name="paper-plane-outline"></ion-icon> -->
+   
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="script.js"></script>
 </body>

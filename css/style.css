@@ -3,6 +3,7 @@
 }
 body{
     font-family: 'Roboto', sans-serif;
+    font-weight: 400;
     background-color: #f3f3f3;
     max-width: 600px;
 }
@@ -15,8 +16,10 @@ header{
     align-items: center;
     padding: 0 22px;
     position: sticky;
+    z-index: 1;
     top: 0;
     width: 100%;
+    box-shadow: 0 4px 6px rgb(0, 0, 0, 5%);
 }
 
 img{
@@ -46,7 +49,6 @@ main{
 
 span{
     font-size: 14px;
-    font-weight: 400;
 }
 
 strong{
@@ -73,31 +75,84 @@ footer{
     align-items: center;
     padding: 0 17px;
     position: fixed;
+    z-index: 1;
     bottom: 0;
     width: 100%;
     max-width: 600px;
+    box-shadow: 0 -4px 6px rgb(0, 0, 0, 5%);
 }
 
-input{
+footer input{
     border: none;
     font-size: 18px;
+    font-family: 'Roboto', sans-serif;
     font-weight: 400;
     width: 100%;
     margin-right: 10px;
 }
 
-input:focus{
+footer input:focus{
     outline: none;
 }
 
-::placeholder {
+footer ::placeholder {
     color: #000;
     font-style: italic;
-    font-size: 18px;
-    font-weight: 400;
 }
 
 footer ion-icon{
     font-size: 26px;
     cursor: pointer;
+}
+
+.telaDeEntrada{
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 2;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.telaDeEntrada img{
+    width: 130px;
+    height: 92px;
+    margin-top: 72px;
+}
+
+.telaDeEntrada input{
+    border: 1px solid #D7D7D7;
+    border-radius: 4px;
+    width: 261px;
+    height: 54px;
+    text-align: center;
+    margin: 94px 0 15px 0;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+::placeholder {
+    color: #AEAEAE;
+}
+
+button{
+    border: none;
+    width: 109px;
+    height: 45px;
+    border-radius: 9px;
+    background-color: #E7E7E7;
+    text-align: center;
+    cursor: pointer;
+    color: #696969;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.escondido{
+    display: none;
 }

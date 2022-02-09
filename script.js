@@ -32,6 +32,47 @@ function enviarMsg() {
     scroll()
 }
 
+const telaLateral = document.querySelector('.telaLateral')
+const fundoEscuro = document.querySelector('.escurecer')
+
+function abrirTelaLateral(){
+    telaLateral.classList.remove('escondido')
+    //telaLateral.classList.add('deslizar')
+    fundoEscuro.classList.remove('escondido')
+}
+
+function esconderTelaLateral(){
+    telaLateral.classList.add('escondido')
+    //telaLateral.classList.remove('deslizar')
+    fundoEscuro.classList.add('escondido')
+}
+
+
+function selecionar(selecionado, classe){
+    const check = selecionado.querySelector('.check')
+    const classeSelecionado = document.querySelector(`.${classe}`)
+    const jaSelecionado = classeSelecionado.querySelector('.selecionado')
+    if(jaSelecionado !== null){
+        jaSelecionado.classList.remove('selecionado')
+    }
+    check.classList.add('selecionado')  
+}
+
+
+let jaVerificado = false
+
+document.addEventListener("keypress", function (e) {
+
+    if (e.key === "Enter" && jaVerificado === true) {
+        const enviar = document.querySelector('footer ion-icon')
+        enviar.click()
+    }
+    if (e.key === "Enter" && jaVerificado === false) {
+        const btn = document.querySelector('.telaDeEntrada button')
+        btn.click()
+        jaVerificado = true
+    }
+})
 
 /*function enviarMsgPrivado() {
     let mensagem = document.querySelector('input').value
@@ -51,18 +92,7 @@ function enviarMsg() {
     scroll()
 }*/
 
-
-let jaVerificado = false
-
-document.addEventListener("keypress", function (e) {
-
-    if (e.key === "Enter" && jaVerificado === true) {
-        const enviar = document.querySelector('footer ion-icon')
-        enviar.click()
-    }
-    if (e.key === "Enter" && jaVerificado === false) {
-        const btn = document.querySelector('.telaDeEntrada button')
-        btn.click()
-        jaVerificado = true
-    }
-})
+/*const participantes = document.querySelectorAll('.participante')
+    for(let i = 0; i < participantes.length; i++){
+        participantes[i].classList.add('escondido')
+    }*/

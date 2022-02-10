@@ -232,3 +232,13 @@ h3{
 .selecionado{
     display: block;
 }
+
+.telaDeEntrada .loading{
+    width: 100px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.telaDeEntrada span{
+    font-size: 20px;
+}

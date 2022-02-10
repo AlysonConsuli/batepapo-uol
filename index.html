@@ -18,15 +18,18 @@
 
 <body>
 
-    <div class="telaDeEntrada">
-        <img src="logoUol.png" alt="Logo Uol">
+    <div class="telaDeEntrada escondido">
+        <img src="img/logoUol.png" alt="Logo Uol" >
         <input type="text" placeholder="Digite seu nome" data-identifier="enter-name">
         <button onclick="entrarNaSala()" data-identifier="start">Entrar</button>
+        
+        <img class="loading escondido" src="img/loading.gif" alt="loading">
+        <span class="escondido">Entrando...</span>
     </div>
 
 
     <header>
-        <img src="logoUol.png" alt="Logo Uol">
+        <img src="img/logoUol.png" alt="Logo Uol">
         <ion-icon name="people" onclick="abrirTelaLateral()"></ion-icon>
     </header>
     <main>
@@ -80,7 +83,7 @@
 
     <footer>
         <input type="text" placeholder="Escreva aqui...">
-        <ion-icon name="paper-plane-outline" onclick="enviarMsg()" data-identifier="send-message"></ion-icon>
+        <ion-icon name="paper-plane-outline" onclick="enviarMensagem()" data-identifier="send-message"></ion-icon>
     </footer>
 
     <div class="escurecer escondido" onclick="esconderTelaLateral()">
@@ -96,12 +99,12 @@
             </div>
             <div class="opcao participante" onclick="selecionar(this,'participantes')" data-identifier="participant">
                 <ion-icon name="person-circle"></ion-icon>
-                <p>João</p>
+                <p>Bot 1</p>
                 <ion-icon name="checkmark-sharp" class="check"></ion-icon>
             </div>
             <div class="opcao participante" onclick="selecionar(this,'participantes')" data-identifier="participant">
                 <ion-icon name="person-circle"></ion-icon>
-                <p>Maria</p>
+                <p>Bot 2</p>
                 <ion-icon name="checkmark-sharp" class="check"></ion-icon>
             </div>
         </div>
@@ -124,7 +127,7 @@
 
 
 
-
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="script.js"></script>
 </body>

@@ -19,10 +19,10 @@
 <body>
 
     <div class="telaDeEntrada escondido">
-        <img src="img/logoUol.png" alt="Logo Uol" >
+        <img src="img/logoUol.png" alt="Logo Uol">
         <input type="text" placeholder="Digite seu nome" data-identifier="enter-name">
         <button onclick="entrarNaSala()" data-identifier="start">Entrar</button>
-        
+
         <img class="loading escondido" src="img/loading.gif" alt="loading">
         <span class="escondido">Entrando...</span>
     </div>
@@ -88,16 +88,18 @@
 
     <div class="escurecer escondido" onclick="esconderTelaLateral()">
     </div>
-    <div class="telaLateral escondido">
+    
+        <div class="telaLateral escondido">
 
-        <div class="participantes">
-            <h3>Escolha um contato para enviar mensagem:</h3>
-            <div class="opcao participante" onclick="selecionar(this,'participantes')" data-identifier="participant">
-                <ion-icon name="people"></ion-icon>
-                <p>Todos</p>
-                <ion-icon name="checkmark-sharp" class="check selecionado"></ion-icon>
-            </div>
-            <div class="opcao participante" onclick="selecionar(this,'participantes')" data-identifier="participant">
+            <div class="participantes">
+                <h3>Escolha um contato para enviar mensagem:</h3>
+                <div class="opcao participante" onclick="selecionar(this,'participantes')"
+                    data-identifier="participant">
+                    <ion-icon name="people"></ion-icon>
+                    <p>Todos</p>
+                    <ion-icon name="checkmark-sharp" class="check selecionado"></ion-icon>
+                </div>
+                <!--<div class="opcao participante" onclick="selecionar(this,'participantes')" data-identifier="participant">
                 <ion-icon name="person-circle"></ion-icon>
                 <p>Bot 1</p>
                 <ion-icon name="checkmark-sharp" class="check"></ion-icon>
@@ -106,24 +108,26 @@
                 <ion-icon name="person-circle"></ion-icon>
                 <p>Bot 2</p>
                 <ion-icon name="checkmark-sharp" class="check"></ion-icon>
+            </div>-->
+                <div class="participantesNovos"></div>
             </div>
-        </div>
 
-        <div class="visibilidade">
-            <h3>Escolha a visibilidade:</h3>
-            <div class="opcao visivel" onclick="selecionar(this,'visibilidade')" data-identifier="visibility">
-                <ion-icon name="lock-open"></ion-icon>
-                <p>Público</p>
-                <ion-icon name="checkmark-sharp" class="check selecionado"></ion-icon>
+            <div class="visibilidade">
+                <h3>Escolha a visibilidade:</h3>
+                <div class="opcao visivel" onclick="selecionar(this,'visibilidade')" data-identifier="visibility">
+                    <ion-icon name="lock-open"></ion-icon>
+                    <p>Público</p>
+                    <ion-icon name="checkmark-sharp" class="check selecionado"></ion-icon>
+                </div>
+                <div class="opcao visivel" onclick="selecionar(this,'visibilidade')" data-identifier="visibility">
+                    <ion-icon name="lock-closed"></ion-icon>
+                    <p>Reservadamente</p>
+                    <ion-icon name="checkmark-sharp" class="check"></ion-icon>
+                </div>
             </div>
-            <div class="opcao visivel" onclick="selecionar(this,'visibilidade')" data-identifier="visibility">
-                <ion-icon name="lock-closed"></ion-icon>
-                <p>Reservadamente</p>
-                <ion-icon name="checkmark-sharp" class="check"></ion-icon>
-            </div>
-        </div>
 
-    </div>
+        </div>
+    
 
 
 

@@ -62,7 +62,7 @@ scroll()*/
 
 
 
-let contato = null
+
 
 /*function enviarMsg() {
     const mensagem = document.querySelector('footer input').value
@@ -116,6 +116,10 @@ function selecionar(selecionado, classe) {
         jaSelecionado.classList.remove('selecionado')
     }
     check.classList.add('selecionado')
+
+    if(classe === 'participantes'){
+        participanteSelecionado = classParticipantes.querySelector('.selecionado')
+    }
 }
 
 
@@ -163,6 +167,8 @@ promise.then(processResponse)
 function atualizarMensagens() {
     promise = axios.get('https://mock-api.driven.com.br/api/v4/uol/messages')
     promise.then(processResponse)
+
+    buscarParticipantes()
 }
 
 
@@ -254,7 +260,7 @@ function enviarMensagem() {
 
     let usuario = {
         from: nome,
-        to: "Todos",
+        to: contatoSelecionado,
         text: mensagem,
         type: "message" // ou "private_message" para o bônus
     }
@@ -275,8 +281,81 @@ function msgFailed(erro) {
 }
 
 
-/*pessoas = info[0]
-main.innerHTML += `
-<div class="msg" data-identifier="message">
-<span><small>${teste.time}</small> <strong>${teste.from}</strong>  para <strong>${teste.to}</strong>:  ${teste.text}</span>
-</div>`*/
+function buscarParticipantes() {
+
+    let promiseParticipantes = axios.get('https://mock-api.driven.com.br/api/v4/uol/participants')
+    promiseParticipantes.then(processParticipantes)
+
+}
+
+function processParticipantes(response) {
+    participantes = response.data
+    console.log(participantes)
+
+    marcarSelecionado()
+    adcNaTelaLateral()
+}
+
+let participantes = null
+
+const participantesNovos = document.querySelector('.participantesNovos')
+
+
+function adcNaTelaLateral() {
+    participantesNovos.innerHTML = ''
+    for (let i = 0; i < participantes.length; i++) {
+        let participante = participantes[i]
+        participantesNovos.innerHTML += `
+        <div class="opcao participante" onclick="selecionar(this,'participantes')" data-identifier="participant">
+            <ion-icon name="person-circle"></ion-icon>
+            <p>${participante.name}</p>
+            <ion-icon name="checkmark-sharp" class="check nome-${participante.name}"></ion-icon>
+        </div>
+        `
+        if (participante.name === contatoSelecionado) {
+            let icone = participantesNovos.querySelector(`.nome-${participante.name}`)
+            icone.classList.add('selecionado')
+        }
+    }
+
+    let saiu = true
+    checkTodosParticipantes = participantesNovos.querySelectorAll('.check')
+    for(let j = 0; j < checkTodosParticipantes.length; j++){
+        if(checkTodosParticipantes[j].classList.contains('selecionado') === true){
+            saiu = false
+        }
+    }
+
+    if(saiu === true && contatoSelecionado !== 'Todos'){
+        //console.log('saiu')
+        const todos = document.querySelector('.participante')
+        const iconeTodos = todos.querySelector('.check')
+        iconeTodos.classList.add('selecionado')
+        participanteSelecionado = document.querySelector('.selecionado')
+    }
+}
+
+let contatoSelecionado = null
+let participanteSelecionado = document.querySelector('.selecionado')
+const classParticipantes = document.querySelector('.participantes')
+
+function marcarSelecionado() {
+    //selecionado = classParticipantes.querySelector('.selecionado')
+
+    /*if (participantes.includes({name: contatoSelecionado}) === false) {
+        const todos = document.querySelector('.participante')
+        const iconeTodos = todos.querySelector('.check')
+        iconeTodos.classList.add('selecionado')
+        console.log('erro')
+    } else {*/
+
+        let contato = participanteSelecionado.parentNode.querySelector('p')
+        contatoSelecionado = contato.innerHTML
+
+    //}
+
+    console.log(contatoSelecionado)
+}
+
+
+buscarParticipantes()

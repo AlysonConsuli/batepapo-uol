@@ -35,6 +35,7 @@ header ion-icon{
 main{
     margin-top: 26px;
     margin-bottom: 84px;
+    overflow-y: hidden
 }
 
 .msg{
@@ -181,6 +182,7 @@ button{
     font-size: 16px;
     line-height: 19px;
     /*transition: transform 3s linear;*/
+    overflow-y: scroll
 }
 
 /*.deslizar{
@@ -242,3 +244,8 @@ h3{
 .telaDeEntrada span{
     font-size: 20px;
 }
+
+/*.scrollSidebar{
+    height: 100%;
+    overflow-y: scroll
+}*/

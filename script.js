@@ -1,6 +1,7 @@
 let nome = prompt('Escolha seu nome')
 const main = document.querySelector('main')
 const entrada = document.querySelector('.telaDeEntrada')
+const input = document.querySelector('footer input')
 
 function nomeUsuario() {
     //nome = document.querySelector('.telaDeEntrada input').value
@@ -119,24 +120,40 @@ function selecionar(selecionado, classe) {
 
     if(classe === 'participantes'){
         participanteSelecionado = classParticipantes.querySelector('.selecionado')
+        let contato = participanteSelecionado.parentNode.querySelector('p')
+        contatoSelecionado = contato.innerHTML
+    }else if(classe === 'visibilidade'){
+        iconeVisibilidade = classVisibilidade.querySelector('.selecionado')
+        let seguranca = iconeVisibilidade.parentNode.querySelector('p')
+        visibilidadeSelecionada = seguranca.innerHTML
+        if(visibilidadeSelecionada === 'Público'){
+            tipoMsg = 'message'
+        }else if(visibilidadeSelecionada === 'Reservadamente'){
+            tipoMsg = 'private_message'
+        }
     }
 }
 
+let classVisibilidade = document.querySelector('.visibilidade')
+let iconeVisibilidade = classVisibilidade.querySelector('.selecionado')
+let visibilidadeSelecionada = 'Público'
+let tipoMsg = 'message'
 
-let jaVerificado = false
 
-/*document.addEventListener("keypress", function (e) {
+//let jaVerificado = false
 
-    if (e.key === "Enter" && jaVerificado === true) {
+document.addEventListener("keypress", function (e) {
+
+    if (e.key === "Enter") {
         const enviar = document.querySelector('footer ion-icon')
         enviar.click()
     }
-    if (e.key === "Enter" && jaVerificado === false) {
+    /*if (e.key === "Enter" && jaVerificado === false) {
         const btn = document.querySelector('.telaDeEntrada button')
         btn.click()
         jaVerificado = true
-    }
-})*/
+    }*/
+})
 
 /*function carregando(){
     let telaDeEntrada = document.querySelector('.telaDeEntrada')
@@ -175,7 +192,7 @@ function atualizarMensagens() {
 function processResponse(response) {
     main.innerHTML = ''
     let info = response.data
-    console.log(info)
+    //console.log(info)
 
     for (let i = 0; i < info.length; i++) {
         let mensagem = info[i]
@@ -191,13 +208,13 @@ function processResponse(response) {
             <span><small>${mensagem.time}</small> <strong>${mensagem.from}</strong> para <strong>${mensagem.to}</strong>: ${mensagem.text}</span>
         </div>`
         } else if (mensagem.type === 'private_message') {
-            if (mensagem.to === nome) {
+            if (mensagem.to === nome || mensagem.from === nome) {
                 main.innerHTML += `
             <div class="msg privado">
                 <span><small>${mensagem.time}</small> <strong>${mensagem.from}</strong> reservadamente para <strong>${mensagem.to}</strong>: ${mensagem.text}</span>
             </div>`
             }
-        }
+        }000
 
     }
     scroll()
@@ -220,11 +237,11 @@ function verificarNome() {
 }
 
 function processSuccess(response) {
-    console.log(response.data)
+    //console.log(response.data)
 }
 
 function processFailed(erro) {
-    console.log(erro.response)
+    //console.log(erro.response)
     let statusCode = erro.response.status
     if (statusCode === 400) {
         alert('Usuário já existe, escolha outro nome')
@@ -244,11 +261,11 @@ function manterConexao() {
 }
 
 function conexaoSuccess(response) {
-    console.log(response.data)
+    //console.log(response.data)
 }
 
 function conexaoFailed(erro) {
-    console.log(erro.response)
+    //console.log(erro.response)
     //let statusCode = erro.response.status
 }
 
@@ -258,11 +275,19 @@ function enviarMensagem() {
 
     const mensagem = document.querySelector('footer input').value
 
+    /*if(nomeParticipantes.find(contatoSelecionado)){
+        console.log('envia')
+    }else{
+        console.log('nao')
+    }*/
+
+    let indiceSelecionado = nomeParticipantes.indexOf(contatoSelecionado)
+
     let usuario = {
         from: nome,
-        to: contatoSelecionado,
+        to: nomeParticipantes[indiceSelecionado],
         text: mensagem,
-        type: "message" // ou "private_message" para o bônus
+        type: tipoMsg // ou "private_message" para o bônus
     }
 
     let promiseMensagem = axios.post('https://mock-api.driven.com.br/api/v4/uol/messages', usuario)
@@ -272,12 +297,13 @@ function enviarMensagem() {
 }
 
 function msgSuccess(response) {
-    console.log(response.data)
+    //console.log(response.data)
+    input.value = ''
 }
 
 function msgFailed(erro) {
-    console.log(erro.response)
-    //let statusCode = erro.response.status
+    alert('Usuário saiu da sala')
+    window.location.reload()
 }
 
 
@@ -288,11 +314,20 @@ function buscarParticipantes() {
 
 }
 
+let nomeParticipantes = ['Todos']
+
 function processParticipantes(response) {
     participantes = response.data
-    console.log(participantes)
+    //console.log(participantes)
 
-    marcarSelecionado()
+    nomeParticipantes = ['Todos']
+    for (let i = 0; i < participantes.length; i++){
+        nomeParticipantes.push(participantes[i].name)
+    }
+
+    //console.log(participantes[0].name)
+
+    //marcarSelecionado()
     adcNaTelaLateral()
 }
 
@@ -303,6 +338,21 @@ const participantesNovos = document.querySelector('.participantesNovos')
 
 function adcNaTelaLateral() {
     participantesNovos.innerHTML = ''
+    for (let i = 1; i < participantes.length; i++){
+        participantesNovos.innerHTML += `
+        <div class="opcao participante" onclick="selecionar(this,'participantes')" data-identifier="participant">
+            <ion-icon name="person-circle"></ion-icon>
+            <p>${nomeParticipantes[i]}</p>
+            <ion-icon name="checkmark-sharp" class="check nome${[i]}"></ion-icon>
+        </div>
+        `
+        if (nomeParticipantes[i] === contatoSelecionado) {
+            let icone = participantesNovos.querySelector(`.nome${[i]}`)
+            icone.classList.add('selecionado')
+        }
+    }
+
+    /*participantesNovos.innerHTML = ''
     for (let i = 0; i < participantes.length; i++) {
         let participante = participantes[i]
         participantesNovos.innerHTML += `
@@ -332,14 +382,15 @@ function adcNaTelaLateral() {
         const iconeTodos = todos.querySelector('.check')
         iconeTodos.classList.add('selecionado')
         participanteSelecionado = document.querySelector('.selecionado')
-    }
+    }*/
 }
 
-let contatoSelecionado = null
+let contatoSelecionado = 'Todos'
 let participanteSelecionado = document.querySelector('.selecionado')
 const classParticipantes = document.querySelector('.participantes')
 
-function marcarSelecionado() {
+
+//function marcarSelecionado() {
     //selecionado = classParticipantes.querySelector('.selecionado')
 
     /*if (participantes.includes({name: contatoSelecionado}) === false) {
@@ -349,13 +400,13 @@ function marcarSelecionado() {
         console.log('erro')
     } else {*/
 
-        let contato = participanteSelecionado.parentNode.querySelector('p')
-        contatoSelecionado = contato.innerHTML
+        /*let contato = participanteSelecionado.parentNode.querySelector('p')
+        contatoSelecionado = contato.innerHTML*/
 
     //}
 
-    console.log(contatoSelecionado)
-}
+    //console.log(contatoSelecionado)
+//}
 
 
-buscarParticipantes()
+//buscarParticipantes()

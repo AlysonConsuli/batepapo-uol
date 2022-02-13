@@ -7,7 +7,6 @@ body{
     background-color: #f3f3f3;
     max-width: 600px;
 }
-
 header{
     height: 80px;
     background-color: #fff;
@@ -21,22 +20,18 @@ header{
     width: 100%;
     box-shadow: 0 4px 6px rgb(0, 0, 0, 5%);
 }
-
 img{
     width: 75px;
     height: 53px;
 }
-
 header ion-icon{
     font-size: 45px;
     cursor: pointer;
 }
-
 main{
     margin-top: 26px;
     margin-bottom: 84px;
 }
-
 .msg{
     min-height: 40px;
     background-color: #fff;
@@ -46,30 +41,24 @@ main{
     margin-bottom: 4px;
     line-height: 16px;
     word-break: break-all;
+    /*word-wrap: break-word;*/
     /*overflow-wrap: break-word*/
 }
-
 span{
     font-size: 14px;
-    /*word-wrap: break-word;*/
 }
-
 strong{
     font-weight: 700;
 }
-
 small{
     color: #AAAAAA;
 }
-
 .entrouSaiu{
     background-color: #dcdcdc
 }
-
 .privado{
     background-color: #FFDEDE;
 }
-
 footer{
     height: 80px;
     background-color: #fff;
@@ -84,7 +73,6 @@ footer{
     max-width: 600px;
     box-shadow: 0 -4px 6px rgb(0, 0, 0, 5%);
 }
-
 footer input{
     border: none;
     font-size: 18px;
@@ -93,21 +81,17 @@ footer input{
     width: 100%;
     margin-right: 10px;
 }
-
 footer input:focus{
     outline: none;
 }
-
 footer ::placeholder {
     color: #000;
     font-style: italic;
 }
-
 footer ion-icon{
     font-size: 26px;
     cursor: pointer;
 }
-
 .telaDeEntrada{
     background-color: #fff;
     width: 100%;
@@ -119,13 +103,11 @@ footer ion-icon{
     flex-direction: column;
     align-items: center;
 }
-
 .telaDeEntrada img{
     width: 130px;
     height: 92px;
     margin-top: 72px;
 }
-
 .telaDeEntrada input{
     border: 1px solid #D7D7D7;
     border-radius: 4px;
@@ -137,11 +119,9 @@ footer ion-icon{
     font-weight: 400;
     font-size: 18px;
 }
-
 ::placeholder {
     color: #AEAEAE;
 }
-
 button{
     border: none;
     width: 109px;
@@ -155,11 +135,9 @@ button{
     font-weight: 400;
     font-size: 18px;
 }
-
 .escondido{
     display: none;
 }
-
 .escurecer{
     background-color: rgb(0, 0, 0, 60%);
     width: 100%;
@@ -170,7 +148,6 @@ button{
     left: 0;
     z-index: 2;
 }
-
 .telaLateral{
     width: 259px;
     height: 100%;
@@ -183,84 +160,65 @@ button{
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
-    /*transition: transform 3s linear;*/
     overflow-y: scroll
 }
-
-/*.deslizar{
-    transform: translateX(-100px);
-}*/
-
-
 .opcao{
     margin-left: 18px;
     display: flex;
     margin-bottom: 11px;
     align-items: center;
     cursor: pointer;
+    max-width: 190px;
 }
-
 .opcao ion-icon{
     font-size: 25px;
     margin-right: 7px;
 }
-
+.opcao p{
+    word-break: break-all;
+}
 h3{
     font-weight: 700;
     text-align: center;
 }
-
 .participantes h3{
     padding: 26px 45px;
 }
-
 .visibilidade h3{
     padding: 20px 45px;
 }
-
 .visivel{
     margin-left: 20px;
 }
-
 .visivel ion-icon{
     font-size: 22px;
 }
-
 .check{
     color: #28BB25;
     position: absolute;
-    right: 17px;
+    right: 7px;
     display: none;
 }
-
 .selecionado{
     display: block;
 }
-
 .telaDeEntrada .loading{
     width: 100px;
     height: auto;
     margin-bottom: 20px;
 }
-
 .telaDeEntrada span{
     font-size: 20px;
 }
-
-/*.scrollSidebar{
-    height: 100%;
-    overflow-y: scroll
-}*/
-
 footer span{
     color: #717171;
+    font-weight: 300;
 }
-
-.marginBot7{
-    margin-bottom: 7px;
+.marginBot5{
+    margin-bottom: 5px;
 }
-
 .inputReservado{
     width: 100%;
     margin-right: 10px;
+    word-break: break-all
 }

@@ -18,7 +18,7 @@
 
 <body>
 
-    <div class="telaDeEntrada escondido">
+    <div class="telaDeEntrada">
         <img src="img/logoUol.png" alt="Logo Uol">
         <input type="text" placeholder="Digite seu nome" data-identifier="enter-name">
         <button onclick="entrarNaSala()" data-identifier="start">Entrar</button>
@@ -32,103 +32,49 @@
         <img src="img/logoUol.png" alt="Logo Uol">
         <ion-icon name="people" onclick="abrirTelaLateral()"></ion-icon>
     </header>
-    <main>
-        <!-- <div class="msg entrouSaiu">
-                <span><small>(09:21:45)</small> <strong>João</strong>  entra na sala...</span>
-            </div>
-            <div class="msg">
-                <span><small>(09:22:28)</small> <strong>João</strong>  para <strong>Todos</strong>:  Bom dia</span>
-            </div>
-            <div class="msg">
-                <span><small>(09:22:38)</small> <strong>Maria</strong>  para <strong>João</strong>:  Oi João :)</span>
-            </div>
-            <div class="msg privado">
-                <span><small>(09:22:48)</small> <strong>João</strong>  reservadamente para <strong>Maria</strong>: Oi gatinha quer tc?</span>
-            </div>
-            <div class="msg entrouSaiu">
-                <span><small>(09:22:58)</small> <strong>Maria</strong>  sai na sala...</span>
-            </div>
-            <div class="msg entrouSaiu">
-                <span><small>(09:21:45)</small> <strong>João</strong>  entra na sala...</span>
-            </div>
-            <div class="msg">
-                <span><small>(09:22:28)</small> <strong>João</strong>  para <strong>Todos</strong>:  Bom dia</span>
-            </div>
-            <div class="msg">
-                <span><small>(09:22:38)</small> <strong>Maria</strong>  para <strong>João</strong>:  Oi João :)</span>
-            </div>
-            <div class="msg privado">
-                <span><small>(09:22:48)</small> <strong>João</strong>  reservadamente para <strong>Maria</strong>:  Oi gatinha quer tc?</span>
-            </div>
-            <div class="msg entrouSaiu">
-                <span><small>(09:22:58)</small> <strong>Maria</strong>  sai na sala...</span>
-            </div>
-            <div class="msg entrouSaiu">
-                <span><small>(09:21:45)</small> <strong>João</strong>  entra na sala...</span>
-            </div>
-            <div class="msg">
-                <span><small>(09:22:28)</small> <strong>João</strong>  para <strong>Todos</strong>:  Bom dia</span>
-            </div>
-            <div class="msg">
-                <span><small>(09:22:38)</small> <strong>Maria</strong>  para <strong>João</strong>:  Oi João :)</span>
-            </div>
-            <div class="msg privado">
-                <span><small>(09:22:48)</small> <strong>João</strong>  reservadamente para <strong>Maria</strong>:  Oi gatinha quer tc?</span>
-            </div>
-            <div class="msg entrouSaiu">
-                <span><small>(09:22:58)</small> <strong>Maria</strong>  sai na sala...</span>
-            </div> -->
-
-    </main>
+    
+    <main></main>
 
     <footer>
-        <input type="text" placeholder="Escreva aqui...">
+        <div class="inputReservado">
+            <input type="text" placeholder="Escreva aqui...">
+            <span class="escondido"></span>
+        </div>
+
         <ion-icon name="paper-plane-outline" onclick="enviarMensagem()" data-identifier="send-message"></ion-icon>
     </footer>
 
     <div class="escurecer escondido" onclick="esconderTelaLateral()">
     </div>
-    
-        <div class="telaLateral escondido">
 
-            <div class="participantes">
-                <h3>Escolha um contato para enviar mensagem:</h3>
-                <div class="opcao participante" onclick="selecionar(this,'participantes')"
-                    data-identifier="participant">
-                    <ion-icon name="people"></ion-icon>
-                    <p>Todos</p>
-                    <ion-icon name="checkmark-sharp" class="check selecionado"></ion-icon>
-                </div>
-                <!--<div class="opcao participante" onclick="selecionar(this,'participantes')" data-identifier="participant">
-                <ion-icon name="person-circle"></ion-icon>
-                <p>Bot 1</p>
-                <ion-icon name="checkmark-sharp" class="check"></ion-icon>
-            </div>
+    <div class="telaLateral escondido">
+
+        <div class="participantes">
+            <h3>Escolha um contato para enviar mensagem:</h3>
             <div class="opcao participante" onclick="selecionar(this,'participantes')" data-identifier="participant">
-                <ion-icon name="person-circle"></ion-icon>
-                <p>Bot 2</p>
-                <ion-icon name="checkmark-sharp" class="check"></ion-icon>
-            </div>-->
-                <div class="participantesNovos"></div>
+                <ion-icon name="people"></ion-icon>
+                <p>Todos</p>
+                <ion-icon name="checkmark-sharp" class="check selecionado"></ion-icon>
             </div>
 
-            <div class="visibilidade">
-                <h3>Escolha a visibilidade:</h3>
-                <div class="opcao visivel" onclick="selecionar(this,'visibilidade')" data-identifier="visibility">
-                    <ion-icon name="lock-open"></ion-icon>
-                    <p>Público</p>
-                    <ion-icon name="checkmark-sharp" class="check selecionado"></ion-icon>
-                </div>
-                <div class="opcao visivel" onclick="selecionar(this,'visibilidade')" data-identifier="visibility">
-                    <ion-icon name="lock-closed"></ion-icon>
-                    <p>Reservadamente</p>
-                    <ion-icon name="checkmark-sharp" class="check"></ion-icon>
-                </div>
-            </div>
-
+            <div class="participantesNovos"></div>
         </div>
-    
 
+        <div class="visibilidade">
+            <h3>Escolha a visibilidade:</h3>
+            <div class="opcao visivel" onclick="selecionar(this,'visibilidade')" data-identifier="visibility">
+                <ion-icon name="lock-open"></ion-icon>
+                <p>Público</p>
+                <ion-icon name="checkmark-sharp" class="check selecionado"></ion-icon>
+            </div>
+            <div class="opcao visivel" onclick="selecionar(this,'visibilidade')" data-identifier="visibility">
+                <ion-icon name="lock-closed"></ion-icon>
+                <p>Reservadamente</p>
+                <ion-icon name="checkmark-sharp" class="check"></ion-icon>
+            </div>
+        </div>
+
+    </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

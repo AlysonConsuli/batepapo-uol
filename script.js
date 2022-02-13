@@ -1,13 +1,35 @@
-let nome = prompt('Escolha seu nome')
+let nome = null //prompt('Escolha seu nome')
 const main = document.querySelector('main')
 const entrada = document.querySelector('.telaDeEntrada')
 const input = document.querySelector('footer input')
+
+//let verificado = false
 
 function nomeUsuario() {
     //nome = document.querySelector('.telaDeEntrada input').value
 }
 
+function entrarNaSala() {
 
+    nome = document.querySelector('.telaDeEntrada input').value
+
+    if (nome !== '') {
+        carregando()
+        verificarNome()
+    }
+}
+
+function carregando() {
+    let inputNome = entrada.querySelector('input')
+    let botaoEntrar = entrada.querySelector('button')
+    let imgLoading = entrada.querySelector('.loading')
+    let entrando = entrada.querySelector('span')
+
+    inputNome.classList.toggle('escondido')
+    botaoEntrar.classList.toggle('escondido')
+    imgLoading.classList.toggle('escondido')
+    entrando.classList.toggle('escondido')
+}
 
 function scroll() {
     let elementoQueQueroQueApareca = document.querySelector('.msg:last-child');
@@ -118,18 +140,22 @@ function selecionar(selecionado, classe) {
     }
     check.classList.add('selecionado')
 
-    if(classe === 'participantes'){
+    if (classe === 'participantes') {
         participanteSelecionado = classParticipantes.querySelector('.selecionado')
         let contato = participanteSelecionado.parentNode.querySelector('p')
         contatoSelecionado = contato.innerHTML
-    }else if(classe === 'visibilidade'){
+
+        enviandoReservardo.innerHTML = `Enviando para ${contatoSelecionado} (reservadamente)`
+    } else if (classe === 'visibilidade') {
         iconeVisibilidade = classVisibilidade.querySelector('.selecionado')
         let seguranca = iconeVisibilidade.parentNode.querySelector('p')
         visibilidadeSelecionada = seguranca.innerHTML
-        if(visibilidadeSelecionada === 'Público'){
+        if (visibilidadeSelecionada === 'Público') {
             tipoMsg = 'message'
-        }else if(visibilidadeSelecionada === 'Reservadamente'){
+            removerReservado()
+        } else if (visibilidadeSelecionada === 'Reservadamente') {
             tipoMsg = 'private_message'
+            inputReservado()
         }
     }
 }
@@ -139,12 +165,24 @@ let iconeVisibilidade = classVisibilidade.querySelector('.selecionado')
 let visibilidadeSelecionada = 'Público'
 let tipoMsg = 'message'
 
+const enviandoReservardo = document.querySelector('footer span')
 
-//let jaVerificado = false
+function inputReservado() {
+    enviandoReservardo.classList.remove('escondido')
+    input.classList.add('marginBot7')
+    enviandoReservardo.innerHTML = `Enviando para ${contatoSelecionado} (reservadamente)`
+}
+
+function removerReservado() {
+    enviandoReservardo.classList.add('escondido')
+    input.classList.remove('marginBot7')
+}
+
+let jaVerificado = false
 
 document.addEventListener("keypress", function (e) {
 
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && jaVerificado === true) {
         const enviar = document.querySelector('footer ion-icon')
         enviar.click()
     }
@@ -176,10 +214,12 @@ function sairDaSala(){
     scroll()
 }*/
 
-let promise = axios.get('https://mock-api.driven.com.br/api/v4/uol/messages')
+function entrarMensagensApi() {
+    let promise = axios.get('https://mock-api.driven.com.br/api/v4/uol/messages')
+    promise.then(processResponse)
+}
 
-promise.then(processResponse)
-
+//entrarMensagensApi()
 
 function atualizarMensagens() {
     promise = axios.get('https://mock-api.driven.com.br/api/v4/uol/messages')
@@ -214,13 +254,13 @@ function processResponse(response) {
                 <span><small>${mensagem.time}</small> <strong>${mensagem.from}</strong> reservadamente para <strong>${mensagem.to}</strong>: ${mensagem.text}</span>
             </div>`
             }
-        }000
+        }
 
     }
     scroll()
 }
 
-setInterval(atualizarMensagens, 3000)
+//setInterval(atualizarMensagens, 3000)
 
 let nomeDeUsuario
 
@@ -238,19 +278,27 @@ function verificarNome() {
 
 function processSuccess(response) {
     //console.log(response.data)
+    //verificado = true
+    entrarMensagensApi()
+    buscarParticipantes()
+    carregando()
+    entrada.classList.add('escondido')
+    jaVerificado = true
+    setInterval(atualizarMensagens, 3000)
+    setInterval(manterConexao, 5000)
 }
 
 function processFailed(erro) {
     //console.log(erro.response)
-    let statusCode = erro.response.status
-    if (statusCode === 400) {
-        alert('Usuário já existe, escolha outro nome')
-        nome = prompt('Escolha seu nome')
-        verificarNome()
-    }
+    //let statusCode = erro.response.status
+    carregando()
+    alert('Usuário já existe, escolha outro nome')
+    //nome = prompt('Escolha seu nome')
+    //verificarNome()
+
 }
 
-verificarNome()
+//verificarNome()
 
 
 function manterConexao() {
@@ -269,7 +317,7 @@ function conexaoFailed(erro) {
     //let statusCode = erro.response.status
 }
 
-setInterval(manterConexao, 5000)
+//setInterval(manterConexao, 5000)
 
 function enviarMensagem() {
 
@@ -321,7 +369,7 @@ function processParticipantes(response) {
     //console.log(participantes)
 
     nomeParticipantes = ['Todos']
-    for (let i = 0; i < participantes.length; i++){
+    for (let i = 0; i < participantes.length; i++) {
         nomeParticipantes.push(participantes[i].name)
     }
 
@@ -338,7 +386,7 @@ const participantesNovos = document.querySelector('.participantesNovos')
 
 function adcNaTelaLateral() {
     participantesNovos.innerHTML = ''
-    for (let i = 1; i < participantes.length; i++){
+    for (let i = 1; i < participantes.length; i++) {
         participantesNovos.innerHTML += `
         <div class="opcao participante" onclick="selecionar(this,'participantes')" data-identifier="participant">
             <ion-icon name="person-circle"></ion-icon>
@@ -393,15 +441,15 @@ const classParticipantes = document.querySelector('.participantes')
 //function marcarSelecionado() {
     //selecionado = classParticipantes.querySelector('.selecionado')
 
-    /*if (participantes.includes({name: contatoSelecionado}) === false) {
-        const todos = document.querySelector('.participante')
-        const iconeTodos = todos.querySelector('.check')
-        iconeTodos.classList.add('selecionado')
-        console.log('erro')
-    } else {*/
+/*if (participantes.includes({name: contatoSelecionado}) === false) {
+    const todos = document.querySelector('.participante')
+    const iconeTodos = todos.querySelector('.check')
+    iconeTodos.classList.add('selecionado')
+    console.log('erro')
+} else {*/
 
-        /*let contato = participanteSelecionado.parentNode.querySelector('p')
-        contatoSelecionado = contato.innerHTML*/
+/*let contato = participanteSelecionado.parentNode.querySelector('p')
+contatoSelecionado = contato.innerHTML*/
 
     //}
 

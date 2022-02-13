@@ -127,7 +127,7 @@ function adcNaTelaLateral() {
     for (let i = 1; i < participantes.length; i++) {
         participantesNovos.innerHTML += `
         <div class="opcao participante" onclick="selecionar(this,'participantes')" data-identifier="participant">
-            <div>
+            <div class="iconeLateral">
                 <ion-icon name="person-circle"></ion-icon>
             </div>
             <p>${nomeParticipantes[i]}</p>

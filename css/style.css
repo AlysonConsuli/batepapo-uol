@@ -222,3 +222,7 @@ footer span{
     margin-right: 10px;
     word-break: break-all
 }
+.iconeLateral{
+    display: flex;
+    align-items: center;
+}

@@ -15,7 +15,7 @@ const main = document.querySelector('main')
 const entrada = document.querySelector('.telaDeEntrada')
 const input = document.querySelector('footer input')
 const telaLateral = document.querySelector('.telaLateral')
-const fundoEscuro = document.querySelector('.escurecer')
+const fundoEscuro = document.querySelector('.escurecerDevagar')
 const enviandoReservardo = document.querySelector('footer span')
 const participantesNovos = document.querySelector('.participantesNovos')
 
@@ -104,7 +104,7 @@ function processResponse(response) {
 
 function scroll() {
     let elementoQueQueroQueApareca = document.querySelector('.msg:last-child');
-    elementoQueQueroQueApareca.scrollIntoView();
+    elementoQueQueroQueApareca.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 function buscarParticipantes() {
@@ -159,10 +159,18 @@ function enviarMensagem() {
         text: mensagem,
         type: tipoMsg
     }
-    let promise = axios.post('https://mock-api.driven.com.br/api/v4/uol/messages', usuario)
 
-    promise.then(msgSuccess)
-    promise.catch(msgFailed)
+    if (usuario.text === '') {
+        alert('Escreva algo')
+    } else if (usuario.from === usuario.to) {
+        alert('Não é possível mandar mensagem para você mesmo. Converse!!')
+    } else if (usuario.to === 'Todos' && usuario.type === "private_message") {
+        alert('Não é possível mandar mensagem privada para Todos')
+    } else {
+        let promise = axios.post('https://mock-api.driven.com.br/api/v4/uol/messages', usuario)
+        promise.then(msgSuccess)
+        promise.catch(msgFailed)
+    }
 }
 
 function msgSuccess(response) {
@@ -175,22 +183,28 @@ function msgFailed(erro) {
 }
 
 function abrirTelaLateral() {
-    telaLateral.classList.remove('escondido')
-    fundoEscuro.classList.remove('escondido')
+    fundoEscuro.classList.add('escurecer')
+    fundoEscuro.classList.add('transparenciaFundo')
+    telaLateral.classList.add('deslizar')
 }
 
 function esconderTelaLateral() {
-    telaLateral.classList.add('escondido')
-    fundoEscuro.classList.add('escondido')
+    setTimeout(clarear, 600)
+    fundoEscuro.classList.remove('transparenciaFundo')
+    telaLateral.classList.remove('deslizar')
+}
+
+function clarear() {
+    fundoEscuro.classList.remove('escurecer')
 }
 
 function selecionar(selecionado, classe) {
     const check = selecionado.querySelector('.check')
     const classeSelecionado = document.querySelector(`.${classe}`)
     const jaSelecionado = classeSelecionado.querySelector('.selecionado')
-    //if (jaSelecionado !== null) {
-    jaSelecionado.classList.remove('selecionado')
-    //}
+    if (jaSelecionado !== null) {
+        jaSelecionado.classList.remove('selecionado')
+    }
     check.classList.add('selecionado')
 
     if (classe === 'participantes') {
